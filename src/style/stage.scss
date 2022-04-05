@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  .stage {
+    flex: 0 0 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    padding: 35px;
+    font-size: 0;
+    background-image: url("@/assets/images/box.png");
+    background-size: 100% 100%;
+    overflow: hidden;
+    .game-name {
+      letter-spacing: 8px;
+      font-size: 40px;
+      font-weight: bold;
+      font-family: "Courier New", Courier, monospace;
+    }
+    .content {
+      overflow: hidden;
+      > div {
+        float: left;
+      }
+      .img3 {
+        width: calc(430px / 3);
+        height: calc(430px / 3);
+      }
+      .img4 {
+        width: calc(430px / 4);
+        height: calc(430px / 4);
+      }
+      .img5 {
+        width: calc(430px / 5);
+        height: calc(430px / 5);
+      }
+    }
+  }
+  .other {
+    width: 200px;
+    margin-left: 20px;
+    .point {
+      width: 200px;
+      height: 200px;
+      padding: 16px 14px 16px 16px;
+      background-image: url("@/assets/images/box.png");
+      background-size: 100% 100%;
+    }
+    .control {
+      margin-top: 20px;
+      padding: 20px 10px;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+  }
+}
