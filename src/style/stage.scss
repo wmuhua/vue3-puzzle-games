@@ -22,6 +22,10 @@
       overflow: hidden;
       > div {
         float: left;
+        .el-image {
+          width: 100%;
+          height: 100%;
+        }
       }
       .img3 {
         width: calc(430px / 3);

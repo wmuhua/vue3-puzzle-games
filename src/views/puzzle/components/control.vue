@@ -4,7 +4,7 @@
       <span class="label">主图：</span>
       <el-select
         v-model="formData.gameImg"
-        :disabled="isStart"
+        :disabled="games.isStart"
         @change="changeGameImg"
       >
         <el-option
@@ -17,7 +17,7 @@
     </div>
     <div class="line">
       <span class="label">等级：</span>
-      <el-select v-model="formData.level" :disabled="isStart">
+      <el-select v-model="formData.level" :disabled="games.isStart">
         <el-option
           v-for="item in formInline.levelList"
           :key="item.value"
@@ -26,19 +26,27 @@
         />
       </el-select>
     </div>
-    <div class="line" v-if="isStart">步数：{{ step }}</div>
+    <div class="line" v-if="games.isStart">步数：{{ games.step }}</div>
     <div class="line">
-      <el-button v-if="isStart" type="primary" @click="newGame(false)"
-        >结束游戏</el-button
-      >
-      <el-button v-else type="primary" @click="newGame(true)"
-        >开始游戏</el-button
-      >
+      <el-button type="primary" @click="changeGame">{{
+        games.isStart ? "结束游戏" : "开始游戏"
+      }}</el-button>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { reactive, toRefs } from "vue"
+const props = defineProps<{ games: any }>()
+
+// 开始游戏、重来
+const changeGame = () => {
+  props.games.init(formData.value)
+}
+// 切换主图
+const changeGameImg = (img: string) => {
+  props.games.setImg(img)
+}
+
 const data = reactive({
   formData: {
     gameImg: "zdg",
@@ -59,20 +67,7 @@ const data = reactive({
     ],
   },
 })
-defineProps<{
-  isStart: boolean
-  step: number
-}>()
 const { formData, formInline } = toRefs(data)
-const emits = defineEmits(["gameChange", "imgChange"])
-// 开始游戏、重来
-const newGame = (bool: boolean) => {
-  emits("gameChange", bool, formData.value)
-}
-// 切换主图
-const changeGameImg = (img: string) => {
-  emits("imgChange", img)
-}
 </script>
 <style lang="scss" scoped>
 .line {
